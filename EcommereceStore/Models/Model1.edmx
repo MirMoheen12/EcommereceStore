@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EcommericestoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EcommericestoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Allusers">
           <Key>
             <PropertyRef Name="Uid" />
@@ -13,12 +13,67 @@
           <Property Name="Username" Type="varchar" MaxLength="100" />
           <Property Name="useremail" Type="varchar" MaxLength="100" />
           <Property Name="UserPass" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="UserAddress" Type="varchar" MaxLength="150" />
         </EntityType>
+        <EntityType Name="POrder">
+          <Key>
+            <PropertyRef Name="Oid" />
+          </Key>
+          <Property Name="Oid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pid" Type="int" />
+          <Property Name="Uid" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Pid" />
+          </Key>
+          <Property Name="Pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLabel" Type="varchar" MaxLength="100" />
+          <Property Name="Pdescr" Type="varchar" MaxLength="100" />
+          <Property Name="Price" Type="int" />
+          <Property Name="PQty" Type="int" />
+          <Property Name="ProductPath" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__POrder__Pid__38996AB5">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="POrder" Type="Self.POrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Pid" />
+            </Principal>
+            <Dependent Role="POrder">
+              <PropertyRef Name="Pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__POrder__Uid__398D8EEE">
+          <End Role="Allusers" Type="Self.Allusers" Multiplicity="0..1" />
+          <End Role="POrder" Type="Self.POrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allusers">
+              <PropertyRef Name="Uid" />
+            </Principal>
+            <Dependent Role="POrder">
+              <PropertyRef Name="Uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EcommericestoreModelStoreContainer">
           <EntitySet Name="Allusers" EntityType="Self.Allusers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POrder" EntityType="Self.POrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__POrder__Pid__38996AB5" Association="Self.FK__POrder__Pid__38996AB5">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="POrder" EntitySet="POrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__POrder__Uid__398D8EEE" Association="Self.FK__POrder__Uid__398D8EEE">
+            <End Role="Allusers" EntitySet="Allusers" />
+            <End Role="POrder" EntitySet="POrder" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EcommericestoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,10 +85,70 @@
           <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="useremail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="UserPass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="POrders" Relationship="EcommericestoreModel.FK__POrder__Uid__398D8EEE" FromRole="Alluser" ToRole="POrder" />
         </EntityType>
         <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Allusers" EntityType="Self.Alluser" />
+          <EntitySet Name="POrders" EntityType="EcommericestoreModel.POrder" />
+          <EntitySet Name="Products" EntityType="EcommericestoreModel.Product" />
+          <AssociationSet Name="FK__POrder__Uid__398D8EEE" Association="EcommericestoreModel.FK__POrder__Uid__398D8EEE">
+            <End Role="Alluser" EntitySet="Allusers" />
+            <End Role="POrder" EntitySet="POrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__POrder__Pid__38996AB5" Association="EcommericestoreModel.FK__POrder__Pid__38996AB5">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="POrder" EntitySet="POrders" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="POrder">
+          <Key>
+            <PropertyRef Name="Oid" />
+          </Key>
+          <Property Name="Oid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pid" Type="Int32" />
+          <Property Name="Uid" Type="Int32" />
+          <NavigationProperty Name="Alluser" Relationship="EcommericestoreModel.FK__POrder__Uid__398D8EEE" FromRole="POrder" ToRole="Alluser" />
+          <NavigationProperty Name="Product" Relationship="EcommericestoreModel.FK__POrder__Pid__38996AB5" FromRole="POrder" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Pid" />
+          </Key>
+          <Property Name="Pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Pdescr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="PQty" Type="Int32" />
+          <Property Name="ProductPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="POrders" Relationship="EcommericestoreModel.FK__POrder__Pid__38996AB5" FromRole="Product" ToRole="POrder" />
+        </EntityType>
+        <Association Name="FK__POrder__Uid__398D8EEE">
+          <End Type="EcommericestoreModel.Alluser" Role="Alluser" Multiplicity="0..1" />
+          <End Type="EcommericestoreModel.POrder" Role="POrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alluser">
+              <PropertyRef Name="Uid" />
+            </Principal>
+            <Dependent Role="POrder">
+              <PropertyRef Name="Uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__POrder__Pid__38996AB5">
+          <End Type="EcommericestoreModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="EcommericestoreModel.POrder" Role="POrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Pid" />
+            </Principal>
+            <Dependent Role="POrder">
+              <PropertyRef Name="Pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -43,10 +158,34 @@
           <EntitySetMapping Name="Allusers">
             <EntityTypeMapping TypeName="EcommericestoreModel.Alluser">
               <MappingFragment StoreEntitySet="Allusers">
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Uid" ColumnName="Uid" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="useremail" ColumnName="useremail" />
                 <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POrders">
+            <EntityTypeMapping TypeName="EcommericestoreModel.POrder">
+              <MappingFragment StoreEntitySet="POrder">
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Oid" ColumnName="Oid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="EcommericestoreModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductPath" ColumnName="ProductPath" />
+                <ScalarProperty Name="PQty" ColumnName="PQty" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Pdescr" ColumnName="Pdescr" />
+                <ScalarProperty Name="PLabel" ColumnName="PLabel" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

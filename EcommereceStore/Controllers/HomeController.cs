@@ -12,7 +12,8 @@ namespace EcommereceStore.Controllers
         DbEntities DbEntities = new DbEntities();
         public ActionResult Index()
         {
-            return View();
+            var data = DbEntities.Products.ToList();
+            return View(data);
         }
         public ActionResult Register()
         {

@@ -6,6 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="01cd71f215f44bc095c1d027bf123d3e" Name="Diagram1">
         <EntityTypeShape EntityType="EcommericestoreModel.Alluser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommericestoreModel.POrder" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="EcommericestoreModel.Product" Width="1.5" PointX="0.75" PointY="4.875" />
+        <AssociationConnector Association="EcommericestoreModel.FK__POrder__Uid__398D8EEE" />
+        <AssociationConnector Association="EcommericestoreModel.FK__POrder__Pid__38996AB5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

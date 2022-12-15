@@ -26,5 +26,7 @@ namespace EcommereceStore.Models
         }
     
         public virtual DbSet<Alluser> Allusers { get; set; }
+        public virtual DbSet<POrder> POrders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

@@ -8,8 +8,64 @@
     <Property Name="Username" Type="varchar" MaxLength="100" />
     <Property Name="useremail" Type="varchar" MaxLength="100" />
     <Property Name="UserPass" Type="varchar" MaxLength="100" />
+    <Property Name="FirstName" Type="varchar" MaxLength="100" />
+    <Property Name="LastName" Type="varchar" MaxLength="100" />
+    <Property Name="UserAddress" Type="varchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="POrder">
+    <Key>
+      <PropertyRef Name="Oid" />
+    </Key>
+    <Property Name="Oid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pid" Type="int" />
+    <Property Name="Uid" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Pid" />
+    </Key>
+    <Property Name="Pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PLabel" Type="varchar" MaxLength="100" />
+    <Property Name="Pdescr" Type="varchar" MaxLength="100" />
+    <Property Name="Price" Type="int" />
+    <Property Name="PQty" Type="int" />
+    <Property Name="ProductPath" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__POrder__Pid__38996AB5">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="POrder" Type="Self.POrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Pid" />
+      </Principal>
+      <Dependent Role="POrder">
+        <PropertyRef Name="Pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POrder__Uid__398D8EEE">
+    <End Role="Allusers" Type="Self.Allusers" Multiplicity="0..1" />
+    <End Role="POrder" Type="Self.POrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Allusers">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="POrder">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="EcommericestoreModelStoreContainer">
     <EntitySet Name="Allusers" EntityType="Self.Allusers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POrder" EntityType="Self.POrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__POrder__Pid__38996AB5" Association="Self.FK__POrder__Pid__38996AB5">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="POrder" EntitySet="POrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POrder__Uid__398D8EEE" Association="Self.FK__POrder__Uid__398D8EEE">
+      <End Role="Allusers" EntitySet="Allusers" />
+      <End Role="POrder" EntitySet="POrder" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

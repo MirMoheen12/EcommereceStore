@@ -8,8 +8,68 @@
     <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="useremail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="UserPass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="POrders" Relationship="EcommericestoreModel.FK__POrder__Uid__398D8EEE" FromRole="Alluser" ToRole="POrder" />
   </EntityType>
   <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Allusers" EntityType="Self.Alluser" />
+    <EntitySet Name="POrders" EntityType="EcommericestoreModel.POrder" />
+    <EntitySet Name="Products" EntityType="EcommericestoreModel.Product" />
+    <AssociationSet Name="FK__POrder__Uid__398D8EEE" Association="EcommericestoreModel.FK__POrder__Uid__398D8EEE">
+      <End Role="Alluser" EntitySet="Allusers" />
+      <End Role="POrder" EntitySet="POrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POrder__Pid__38996AB5" Association="EcommericestoreModel.FK__POrder__Pid__38996AB5">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="POrder" EntitySet="POrders" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="POrder">
+    <Key>
+      <PropertyRef Name="Oid" />
+    </Key>
+    <Property Name="Oid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pid" Type="Int32" />
+    <Property Name="Uid" Type="Int32" />
+    <NavigationProperty Name="Alluser" Relationship="EcommericestoreModel.FK__POrder__Uid__398D8EEE" FromRole="POrder" ToRole="Alluser" />
+    <NavigationProperty Name="Product" Relationship="EcommericestoreModel.FK__POrder__Pid__38996AB5" FromRole="POrder" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Pid" />
+    </Key>
+    <Property Name="Pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PLabel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Pdescr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="PQty" Type="Int32" />
+    <Property Name="ProductPath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="POrders" Relationship="EcommericestoreModel.FK__POrder__Pid__38996AB5" FromRole="Product" ToRole="POrder" />
+  </EntityType>
+  <Association Name="FK__POrder__Uid__398D8EEE">
+    <End Type="EcommericestoreModel.Alluser" Role="Alluser" Multiplicity="0..1" />
+    <End Type="EcommericestoreModel.POrder" Role="POrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alluser">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="POrder">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POrder__Pid__38996AB5">
+    <End Type="EcommericestoreModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="EcommericestoreModel.POrder" Role="POrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Pid" />
+      </Principal>
+      <Dependent Role="POrder">
+        <PropertyRef Name="Pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

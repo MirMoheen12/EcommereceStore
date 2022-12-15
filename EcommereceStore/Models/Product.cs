@@ -12,21 +12,20 @@ namespace EcommereceStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Alluser
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Alluser()
+        public Product()
         {
             this.POrders = new HashSet<POrder>();
         }
     
-        public int Uid { get; set; }
-        public string Username { get; set; }
-        public string useremail { get; set; }
-        public string UserPass { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string UserAddress { get; set; }
+        public int Pid { get; set; }
+        public string PLabel { get; set; }
+        public string Pdescr { get; set; }
+        public Nullable<int> Price { get; set; }
+        public Nullable<int> PQty { get; set; }
+        public string ProductPath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<POrder> POrders { get; set; }

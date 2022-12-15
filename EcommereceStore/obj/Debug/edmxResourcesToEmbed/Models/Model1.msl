@@ -4,10 +4,34 @@
     <EntitySetMapping Name="Allusers">
       <EntityTypeMapping TypeName="EcommericestoreModel.Alluser">
         <MappingFragment StoreEntitySet="Allusers">
+          <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Uid" ColumnName="Uid" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="useremail" ColumnName="useremail" />
           <ScalarProperty Name="UserPass" ColumnName="UserPass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POrders">
+      <EntityTypeMapping TypeName="EcommericestoreModel.POrder">
+        <MappingFragment StoreEntitySet="POrder">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Pid" ColumnName="Pid" />
+          <ScalarProperty Name="Oid" ColumnName="Oid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="EcommericestoreModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductPath" ColumnName="ProductPath" />
+          <ScalarProperty Name="PQty" ColumnName="PQty" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Pdescr" ColumnName="Pdescr" />
+          <ScalarProperty Name="PLabel" ColumnName="PLabel" />
+          <ScalarProperty Name="Pid" ColumnName="Pid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
