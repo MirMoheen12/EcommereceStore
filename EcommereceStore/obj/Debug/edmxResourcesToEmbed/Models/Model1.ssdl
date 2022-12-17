@@ -31,6 +31,15 @@
     <Property Name="PQty" Type="int" />
     <Property Name="ProductPath" Type="varchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="ShopCart">
+    <Key>
+      <PropertyRef Name="Sid" />
+    </Key>
+    <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="oid" Type="int" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="uid" Type="int" />
+  </EntityType>
   <Association Name="FK__POrder__Pid__38996AB5">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="POrder" Type="Self.POrder" Multiplicity="*" />
@@ -59,6 +68,7 @@
     <EntitySet Name="Allusers" EntityType="Self.Allusers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="POrder" EntityType="Self.POrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShopCart" EntityType="Self.ShopCart" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__POrder__Pid__38996AB5" Association="Self.FK__POrder__Pid__38996AB5">
       <End Role="Product" EntitySet="Product" />
       <End Role="POrder" EntitySet="POrder" />

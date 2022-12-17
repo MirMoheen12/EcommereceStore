@@ -36,6 +36,15 @@
           <Property Name="PQty" Type="int" />
           <Property Name="ProductPath" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="ShopCart">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="oid" Type="int" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="uid" Type="int" />
+        </EntityType>
         <Association Name="FK__POrder__Pid__38996AB5">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="POrder" Type="Self.POrder" Multiplicity="*" />
@@ -64,6 +73,7 @@
           <EntitySet Name="Allusers" EntityType="Self.Allusers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POrder" EntityType="Self.POrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopCart" EntityType="Self.ShopCart" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__POrder__Pid__38996AB5" Association="Self.FK__POrder__Pid__38996AB5">
             <End Role="Product" EntitySet="Product" />
             <End Role="POrder" EntitySet="POrder" />
@@ -102,6 +112,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="POrder" EntitySet="POrders" />
           </AssociationSet>
+          <EntitySet Name="ShopCarts" EntityType="EcommericestoreModel.ShopCart" />
         </EntityContainer>
         <EntityType Name="POrder">
           <Key>
@@ -149,6 +160,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ShopCart">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="oid" Type="Int32" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="uid" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -186,6 +206,16 @@
                 <ScalarProperty Name="Pdescr" ColumnName="Pdescr" />
                 <ScalarProperty Name="PLabel" ColumnName="PLabel" />
                 <ScalarProperty Name="Pid" ColumnName="Pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopCarts">
+            <EntityTypeMapping TypeName="EcommericestoreModel.ShopCart">
+              <MappingFragment StoreEntitySet="ShopCart">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="oid" ColumnName="oid" />
+                <ScalarProperty Name="Sid" ColumnName="Sid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

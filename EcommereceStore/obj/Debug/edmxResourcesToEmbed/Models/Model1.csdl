@@ -25,6 +25,7 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="POrder" EntitySet="POrders" />
     </AssociationSet>
+    <EntitySet Name="ShopCarts" EntityType="EcommericestoreModel.ShopCart" />
   </EntityContainer>
   <EntityType Name="POrder">
     <Key>
@@ -72,4 +73,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ShopCart">
+    <Key>
+      <PropertyRef Name="Sid" />
+    </Key>
+    <Property Name="Sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="oid" Type="Int32" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="uid" Type="Int32" />
+  </EntityType>
 </Schema>

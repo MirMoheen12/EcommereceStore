@@ -1,0 +1,21 @@
+﻿@model EcommereceStore.Models.ShopCart
+
+@{
+    ViewBag.Title = "Addtocart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Addtocart</h2>
+
+
+<form method="post">
+    <div class="">
+        <div class="col-md-2" >Quantity</div>
+        <br />
+        <input type="number" name="Qty"class="input-sm" />
+        <input type="hidden" value="@ViewBag.id" name="oid" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>    
+  

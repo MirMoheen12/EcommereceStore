@@ -20,6 +20,11 @@ namespace EcommereceStore.Controllers
             var data = DbEntities.Products.Where(x => x.Pid == id).FirstOrDefault();
             return View(data);
         }
+        public ActionResult Addtocart(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
         public ActionResult Register()
         {
             return View();

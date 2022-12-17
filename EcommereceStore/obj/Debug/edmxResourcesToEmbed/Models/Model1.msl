@@ -35,5 +35,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ShopCarts">
+      <EntityTypeMapping TypeName="EcommericestoreModel.ShopCart">
+        <MappingFragment StoreEntitySet="ShopCart">
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="oid" ColumnName="oid" />
+          <ScalarProperty Name="Sid" ColumnName="Sid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
