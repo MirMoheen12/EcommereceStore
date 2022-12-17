@@ -15,6 +15,11 @@ namespace EcommereceStore.Controllers
             var data = DbEntities.Products.ToList();
             return View(data);
         }
+        public ActionResult ProduntDetails(int id)
+        {
+            var data = DbEntities.Products.Where(x => x.Pid == id).FirstOrDefault();
+            return View(data);
+        }
         public ActionResult Register()
         {
             return View();
