@@ -219,6 +219,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ProduntDetails.cshtml" />
     <Content Include="Views\Home\Addtocart.cshtml" />
+    <Content Include="Views\Home\checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,8 +15,21 @@ namespace EcommereceStore.Controllers
             var data = DbEntities.Products.ToList();
             return View(data);
         }
+        public ActionResult checkout()
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var data = DbEntities.ShopCarts.ToList();
+            return View(data);
+        }
         public ActionResult ProduntDetails(int id)
         {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var data = DbEntities.Products.Where(x => x.Pid == id).FirstOrDefault();
             return View(data);
         }
@@ -34,6 +47,7 @@ namespace EcommereceStore.Controllers
         {
             DbEntities.Allusers.Add(alluser);
             DbEntities.SaveChanges();
+            Session["UserName"] = alluser.Username;
             return View();
         }
         public ActionResult Login()
@@ -46,6 +60,7 @@ namespace EcommereceStore.Controllers
             var data = DbEntities.Allusers.Where(x => x.useremail == alluser.useremail && x.UserPass == alluser.UserPass).FirstOrDefault();
             if (data != null)
             {
+                Session["UserName"] = data.Username;
                 return RedirectToAction("Index", "Home");
             }
             return View();

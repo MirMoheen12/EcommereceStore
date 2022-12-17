@@ -16,12 +16,13 @@
     {
         <div class="col-md-3" style="margin-left:50Px;background-color:blueviolet;border-radius:10PX">
             <div class="">
-                <img class="img-responsive" style="width:100%;height:auto;margin-top:5PX" src="~/Images/shk.jpg" />
+                <img class="img-responsive" style="width:100%;height:auto;margin-top:5PX" src="@item.ProductPath" />
             </div>
-            <h3 class="text-center">Shoes</h3>
+
+            <h3 class="text-center">@item.PLabel</h3>
             @*@Html.ActionLink("ProduntDetails", "Home", new {  id = item.Pid  })*@
             <a href="@Url.Action("ProduntDetails","Home",new {id=item.Pid })" class="text-center bg-success btn btn-success">Details</a>
-           
+
 
         </div>
     }
